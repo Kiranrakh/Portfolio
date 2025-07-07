@@ -53,11 +53,6 @@ export const VideoIntro: React.FC = () => {
                 className="relative group"
               >
                 <div className="w-32 h-32 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center relative group cursor-pointer">
-                  <img
-                    src="https://drive.google.com/uc?export=view&id=1wod1Bcdf9Csv6Yr3U0EJfvteUbrCIyR8"
-                    alt="Video Introduction"
-                    className="w-full h-full rounded-full object-cover border-4 border-white/20"
-                  />
                   <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center group-hover:bg-black/20 transition-all duration-300">
                     <Play className="w-16 h-16 text-white group-hover:scale-110 transition-transform duration-300" />
                   </div>
