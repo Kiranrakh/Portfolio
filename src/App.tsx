@@ -18,6 +18,8 @@ import { Contact } from './components/Contact';
 import { AdminPanel } from './components/AdminPanel';
 import { ParticleBackground } from './components/ParticleBackground';
 import { Footer } from './components/Footer';
+import { profile } from '../assets/profile.jpg'; // Kiran
+
 
 function App() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
