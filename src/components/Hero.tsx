@@ -202,14 +202,24 @@ export const Hero: React.FC = () => {
                       }}
                     >
                       <div className="w-full h-full bg-slate-900 rounded-2xl p-1">
+                       
                         <img
-                          src="/src/assets/profile.jpg"
+  src={profile}
+  alt="Kiran Rakh - DevOps Engineer"
+  className="w-full h-full rounded-xl object-cover object-center transition-all duration-500 hover:brightness-110"
+  style={{
+    filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.5)) saturate(1.1) brightness(1.05)',
+  }}
+/>
+
+                        {/*                  <img
+                         src="/src/assets/profile.jpg"
                           alt="Kiran Rakh - DevOps Engineer"
                           className="w-full h-full rounded-xl object-cover object-center transition-all duration-500 hover:brightness-110 hover:contrast-110"
                           style={{ 
                             filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.5)) saturate(1.1) brightness(1.05)',
                           }}
-                        />
+                        /> */}
                       </div>
                     </div>
                     
