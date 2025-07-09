@@ -13,19 +13,79 @@ export const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Create mailto link with form data
-    const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio');
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    const mailtoLink = `mailto:kiranrakh155@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Open default email client
-    window.location.href = mailtoLink;
-    
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    alert('Thank you for your message! Your email client should open now.');
+    try {
+      // Create a more comprehensive email body
+      const emailSubject = encodeURIComponent(formData.subject || 'Portfolio Contact - DevOps Opportunity');
+      const emailBody = encodeURIComponent(`
+Dear Kiran,
+
+I am reaching out regarding your DevOps portfolio.
+
+Contact Details:
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}
+
+Best regards,
+${formData.name}
+
+---
+This message was sent from your portfolio website contact form.
+      `);
+      
+      // Create multiple email options for better delivery
+      const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=kiranrakh155@gmail.com&su=${emailSubject}&body=${emailBody}`;
+      const outlookLink = `https://outlook.live.com/mail/0/deeplink/compose?to=kiranrakh155@gmail.com&subject=${emailSubject}&body=${emailBody}`;
+      const mailtoLink = `mailto:kiranrakh155@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+      
+      // Try to open Gmail first, then fallback to mailto
+      const newWindow = window.open(gmailLink, '_blank');
+      
+      // If popup is blocked, try mailto
+      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        window.location.href = mailtoLink;
+      }
+      
+      // Also try to send via a simple fetch to a service (if available)
+      try {
+        await fetch('https://formspree.io/f/kiranrakh155@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            _replyto: formData.email,
+          }),
+        });
+      } catch (serviceError) {
+        console.log('Backup service unavailable, using email client');
+      }
+      
+      // Reset form
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      
+      // Show success message
+      alert(`✅ Thank you ${formData.name}! Your message has been prepared for sending. 
+      
+📧 Gmail should open in a new tab, or your default email client will launch.
+      
+📋 Your message details:
+• Subject: ${formData.subject}
+• To: kiranrakh155@gmail.com
+      
+If the email doesn't open automatically, please copy the details and send manually to kiranrakh155@gmail.com`);
+      
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('❌ There was an issue preparing your message. Please try sending directly to kiranrakh155@gmail.com');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

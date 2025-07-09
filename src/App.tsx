@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
@@ -20,10 +20,84 @@ import { ParticleBackground } from './components/ParticleBackground';
 import { Footer } from './components/Footer';
 
 function App() {
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+  const [cursorTrails, setCursorTrails] = useState<Array<{id: number, x: number, y: number}>>([]);
+
+  useEffect(() => {
+    const updateCursorPosition = (e: MouseEvent) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+      
+      // Add ultra-smooth cursor trail
+      const trailId = Date.now();
+      setCursorTrails(prev => [...prev.slice(-12), { id: trailId, x: e.clientX, y: e.clientY }]);
+      
+      // Remove trail after animation
+      setTimeout(() => {
+        setCursorTrails(prev => prev.filter(trail => trail.id !== trailId));
+      }, 600);
+    };
+
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList?.contains('cursor-pointer'))) {
+        setIsHovering(true);
+      }
+    };
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === 'A' || target.tagName === 'BUTTON' || target.classList?.contains('cursor-pointer'))) {
+        setIsHovering(false);
+      }
+    };
+
+    document.addEventListener('mousemove', updateCursorPosition);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mouseenter', handleMouseEnter, true);
+    document.addEventListener('mouseleave', handleMouseLeave, true);
+
+    return () => {
+      document.removeEventListener('mousemove', updateCursorPosition);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mouseenter', handleMouseEnter, true);
+      document.removeEventListener('mouseleave', handleMouseLeave, true);
+    };
+  }, []);
+
   return (
     <Router>
       <div className="min-h-screen bg-slate-900 text-white relative overflow-x-hidden">
+        {/* Custom Cursor */}
+        <div
+          className={`cursor ${isHovering ? 'hover' : ''} ${isClicking ? 'click' : ''}`}
+          style={{
+            left: `${cursorPosition.x}px`,
+            top: `${cursorPosition.y}px`,
+          }}
+        />
+        
         <ParticleBackground />
+        
+        {/* Cursor Trails */}
+        {cursorTrails.map((trail, index) => (
+          <div
+            key={trail.id}
+            className="cursor-trail"
+            style={{
+              left: `${trail.x - 3}px`,
+              top: `${trail.y - 3}px`,
+              animationDelay: `${index * 0.05}s`,
+            }}
+          />
+        ))}
+        
         <Navigation />
         <Routes>
           <Route path="/" element={

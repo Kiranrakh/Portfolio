@@ -54,7 +54,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-left"
+            className="text-left mt-8 lg:mt-16"
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               <span className="text-white">Hi, I'm </span>
@@ -103,41 +103,214 @@ export const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Profile Image Section */}
+          {/* Revolutionary Profile Section */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center lg:justify-end mt-8 lg:mt-16"
           >
-            <div className="relative">
-              {/* Animated background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-2xl animate-pulse blur-xl opacity-30"></div>
-              
-              {/* Profile card */}
-              <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-8 hover:border-slate-600/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
-                <div className="w-64 h-64 mx-auto relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-xl rotate-6 animate-pulse"></div>
-                  <img
-                    src="https://drive.google.com/uc?export=view&id=1nfnuyr268TQ3SpSF02UNSCYJLQ9NHCCw"
-                    alt="Kiran Rakh - DevOps Engineer"
-                    className="w-full h-full rounded-xl object-cover border-4 border-white/20 backdrop-blur-sm relative z-10 hover:scale-105 transition-transform duration-300"
-                    style={{ 
-                      filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3))',
-                      background: 'transparent'
-                    }}
-                  />
-                </div>
-                
-                <div className="mt-6 text-center">
-                  <h3 className="text-xl font-semibold text-white mb-2">DevOps Engineer</h3>
-                  <p className="text-slate-300 text-sm">Pune, India</p>
-                  <div className="flex items-center justify-center space-x-2 mt-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-green-400 text-sm">Available for opportunities</span>
+            <div className="relative perspective-1000">
+              {/* Futuristic Container */}
+              <motion.div 
+                className="relative w-80 h-[500px] mx-auto mt-4"
+                style={{ 
+                  transformStyle: "preserve-3d",
+                  animation: "profileFloat 6s ease-in-out infinite"
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  rotateY: 10,
+                  rotateX: 5,
+                  transition: { type: "spring", stiffness: 300, damping: 20 }
+                }}
+              >
+                {/* Holographic Base */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-800/90 via-slate-900/95 to-black/90 rounded-3xl backdrop-blur-xl border border-cyan-500/30 overflow-hidden">
+                  {/* Energy Grid Background */}
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px)
+                      `,
+                      backgroundSize: '20px 20px'
+                    }}></div>
+                  </div>
+                  
+                  {/* Animated Border Glow */}
+                  <div className="absolute inset-0 rounded-3xl" style={{
+                    background: `conic-gradient(from 0deg, 
+                      transparent, 
+                      rgba(34, 211, 238, 0.3), 
+                      transparent, 
+                      rgba(168, 85, 247, 0.3), 
+                      transparent, 
+                      rgba(34, 211, 238, 0.3), 
+                      transparent
+                    )`,
+                    animation: "spin 8s linear infinite"
+                  }}>
+                    <div className="absolute inset-1 bg-slate-900/95 rounded-3xl"></div>
+                  </div>
+                  
+                  {/* Holographic Scan Lines */}
+                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                    <motion.div
+                      className="absolute w-full h-1 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent"
+                      style={{ animation: "hologramScan 4s ease-in-out infinite" }}
+                    />
+                    <motion.div
+                      className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-purple-400/40 to-transparent"
+                      style={{ animation: "hologramScan 3s ease-in-out infinite 1s" }}
+                    />
+                  </div>
+                  
+                  {/* Data Streams */}
+                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                    {[...Array(5)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute h-0.5 w-20 bg-gradient-to-r from-transparent via-green-400/50 to-transparent"
+                        style={{
+                          top: `${20 + i * 15}%`,
+                          animation: `dataStream ${2 + i * 0.5}s ease-in-out infinite ${i * 0.3}s`
+                        }}
+                      />
+                    ))}
                   </div>
                 </div>
-              </div>
+                
+                {/* Profile Image Container */}
+                <div className="absolute inset-4 top-16 bottom-24 rounded-2xl overflow-hidden">
+                  {/* Image Frame with Rotating Energy */}
+                  <motion.div 
+                    className="relative w-full h-full rounded-2xl overflow-hidden"
+                    style={{ animation: "energyPulse 3s ease-in-out infinite" }}
+                  >
+                    {/* Static Energy Frame */}
+                    <div
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        background: `linear-gradient(45deg, 
+                          rgba(34, 211, 238, 0.8), 
+                          rgba(168, 85, 247, 0.6), 
+                          rgba(34, 211, 238, 0.8)
+                        )`,
+                        padding: "2px"
+                      }}
+                    >
+                      <div className="w-full h-full bg-slate-900 rounded-2xl p-1">
+                        <img
+                          src="/src/assets/profile.jpg"
+                          alt="Kiran Rakh - DevOps Engineer"
+                          className="w-full h-full rounded-xl object-cover object-center transition-all duration-500 hover:brightness-110 hover:contrast-110"
+                          style={{ 
+                            filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.5)) saturate(1.1) brightness(1.05)',
+                          }}
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Holographic Overlay Effects */}
+                    <div className="absolute inset-0 rounded-2xl">
+                      {/* Prismatic Light Effect */}
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl opacity-30"
+                        style={{
+                          background: "linear-gradient(45deg, transparent 30%, rgba(34, 211, 238, 0.2) 50%, transparent 70%)"
+                        }}
+                        animate={{ x: [-200, 200] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                      />
+                      
+                      {/* Digital Glitch Effect */}
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl mix-blend-screen"
+                        style={{
+                          background: "repeating-linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.03) 2px, transparent 4px)"
+                        }}
+                        animate={{ x: [0, 10, 0] }}
+                        transition={{ duration: 0.1, repeat: Infinity, repeatType: "reverse" }}
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+                
+                {/* Title and Info Inside the Box */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <motion.div
+                    className="bg-black/60 backdrop-blur-sm rounded-xl p-4 border border-cyan-500/30"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8, duration: 0.6 }}
+                  >
+                    <div className="text-center">
+                      <motion.h3 
+                        className="text-xl font-bold text-white mb-1"
+                        style={{ animation: "titleGlow 2s ease-in-out infinite" }}
+                      >
+                        DevOps Engineer
+                      </motion.h3>
+                      <p className="text-cyan-400 text-sm mb-2 font-medium">Pune, India</p>
+                      <motion.div 
+                        className="flex items-center justify-center space-x-2"
+                        animate={{ opacity: [0.7, 1, 0.7] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <motion.div 
+                          className="w-2 h-2 bg-green-400 rounded-full"
+                          style={{ animation: "statusBlink 2s infinite" }}
+                        />
+                        <span className="text-green-400 text-xs font-medium">Available for opportunities</span>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+                
+                {/* Floating UI Elements */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {/* Status Indicators */}
+                  <motion.div
+                    className="absolute top-6 right-6 flex items-center space-x-2"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <div className="w-2 h-2 bg-green-400 rounded-full shadow-lg shadow-green-400/50"></div>
+                    <span className="text-green-400 text-xs font-mono">ONLINE</span>
+                  </motion.div>
+                  
+                  {/* Floating DevOps Icons */}
+                  {[
+                    { icon: "🐳", delay: 0, x: -25, y: -15 },
+                    { icon: "☸️", delay: 0.5, x: 25, y: -10 },
+                    { icon: "🔧", delay: 1, x: -20, y: 15 },
+                    { icon: "⚡", delay: 1.5, x: 30, y: 20 },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      className="absolute text-2xl opacity-60"
+                      style={{
+                        left: `${50 + item.x}%`,
+                        top: `${40 + item.y}%`,
+                      }}
+                      animate={{
+                        y: [0, -10, 0],
+                        rotate: [0, 10, -10, 0],
+                        scale: [1, 1.1, 1],
+                      }}
+                      transition={{
+                        duration: 3,
+                        delay: item.delay,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      {item.icon}
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -146,7 +319,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex items-center justify-center mt-16"
+          className="flex items-center justify-center mt-20"
         >
           <a
             href="#about"
