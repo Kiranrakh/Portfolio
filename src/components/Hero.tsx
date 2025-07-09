@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import profile from '../assets/profile.jpg';
 
 export const Hero: React.FC = () => {
   const [currentPhrase, setCurrentPhrase] = useState(0);
